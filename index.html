@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora — JavaScript Puro</title>
+
+  <!-- Link para o CSS (crie styles.css na mesma pasta) -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <main id="calculadora" class="calculator" role="application" aria-label="Calculadora">
+    <!-- Display (readonly) -->
+    <input id="display" type="text" readonly aria-live="polite" aria-label="Visor da calculadora">
+
+    <!-- Grid de botões -->
+    <div id="botoes" class="buttons" role="group" aria-label="Teclado da calculadora">
+      <!-- Linha 1 -->
+      <button type="button">7</button>
+      <button type="button">8</button>
+      <button type="button">9</button>
+      <button type="button">/</button>
+
+      <!-- Linha 2 -->
+      <button type="button">4</button>
+      <button type="button">5</button>
+      <button type="button">6</button>
+      <button type="button">*</button>
+
+      <!-- Linha 3 -->
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">-</button>
+
+      <!-- Linha 4 -->
+      <button type="button">0</button>
+      <button type="button">.</button>
+      <button type="button">=</button>
+      <button type="button">+</button>
+
+      <!-- Botão limpar -->
+      <button id="limpar" type="button" aria-label="Limpar">C</button>
+    </div>
+  </main>
+
+  <!-- Script principal (crie app.js na mesma pasta) -->
+  <script src="./js/app.js"></script>
+</body>
+</html>

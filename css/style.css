@@ -1,0 +1,164 @@
+/* styles.css - Estilo da Calculadora */
+
+/* Variáveis para facilitar customização */
+:root{
+  --bg: #e6eef6;            /* fundo da página */
+  --card: #ffffff;          /* fundo do cartão */
+  --card-contrast: #f3f6fa; /* detalhe leve */
+  --display-bg: #091023;    /* fundo do visor */
+  --display-text: #e6eef6;  /* texto do visor */
+  --btn-bg: #d6e8fa;        /* fundo padrão dos botões */
+  --btn-text: #0b1220;      /* texto dos botões */
+  --btn-op: #cbd5e1;        /* cor de operadores */
+  --btn-eq: #06b6d4;        /* botão = (destaque) */
+  --btn-clear: #fb7185;     /* botão C (limpar) */
+  --shadow: 0 10px 30px rgba(8, 15, 25, 0.08);
+  --gap: 10px;
+  --radius: 12px;
+  --focus: 3px solid rgba(6, 182, 212, 0.15);
+}
+
+/* Reset mínimo */
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: linear-gradient(180deg, var(--bg), #dfe9f3);
+  color: var(--btn-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Card principal */
+#calculadora {
+  width: 100%;
+  max-width: 360px;
+  background: linear-gradient(180deg, var(--card), var(--card-contrast));
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(11,18,32,0.04);
+}
+
+/* Display (visor) */
+#display {
+  width: 100%;
+  height: 68px;
+  background: linear-gradient(180deg, var(--display-bg), #071324);
+  color: var(--display-text);
+  border: none;
+  border-radius: 10px;
+  padding: 16px;
+  padding-right: 20px;
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 1.6rem;
+  text-align: right;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+  margin-bottom: 14px;
+  outline: none;
+}
+
+/* Indicar visualmente que é readonly (opcional) */
+#display[readonly] {
+  opacity: 0.98;
+  cursor: default;
+}
+
+/* Container de botões em grid */
+#botoes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  align-items: center;
+}
+
+/* Estilo base dos botões */
+#botoes button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 14px 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(9,15,25,0.06);
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  user-select: none;
+}
+
+/* Foco acessível */
+#botoes button:focus {
+  outline: none;
+  box-shadow: var(--focus), 0 6px 18px rgba(9,15,25,0.06);
+  transform: translateY(-1px);
+}
+
+/* Hover e active */
+#botoes button:hover {
+  transform: translateY(-3px);
+}
+#botoes button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(9,15,25,0.06);
+}
+
+/* Operadores têm tonalidade diferente */
+/*#botoes button:where(:not(#limpar)):not(:nth-last-child(1)) {
+  /* regra geral já cobre, we'll set operator class overrides below */
+/*}
+
+
+/* Seleção específica pelo conteúdo - operadores, = e C */
+#botoes button:nth-child(4),
+#botoes button:nth-child(8),
+#botoes button:nth-child(12),
+#botoes button:nth-child(16) {
+  /* Botões na coluna direita (operadores) */
+  background: linear-gradient(180deg, var(--btn-op), #bfcfe1);
+  color: var(--btn-text);
+}
+
+/* Botão "=" (terceiro da última linha) — vamos selecionar por conteúdo via id não existente; usar atributo text não é confiável,
+   então aplicaremos estilo via selector para o botão que aparece como terceiro na 4ª linha (posição fixa no HTML). */
+#botoes button:nth-child(15) {
+  background: linear-gradient(180deg, var(--btn-eq), #0891b2);
+  color: #021316;
+  box-shadow: 0 8px 26px rgba(6,182,212,0.18);
+}
+
+/* Botão "C" (limpar) — no HTML tem id="limpar" */
+#limpar {
+  grid-column: 1 / -1; /* ocupa toda a linha inferior, se preferir; caso queira manter separado remova esta linha */
+  background: linear-gradient(180deg, var(--btn-clear), #ef4444);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 8px 26px rgba(239,68,68,0.14);
+}
+
+/* Se preferir que o C não ocupe toda linha, comente a regra grid-column acima e use: */
+/* #limpar { grid-column: span 1; } */
+
+/* Melhor contraste de texto em botões especiais */
+#botoes button[aria-pressed="true"] {
+  outline: none;
+}
+
+/* Tornar os botões maiores em telas touch */
+@media (max-width: 420px) {
+  #calculadora { max-width: 320px; padding: 14px; }
+  #display { height: 62px; font-size: 1.4rem; padding: 12px; }
+  #botoes button { padding: 12px; font-size: 1rem; border-radius: 8px; }
+  :root { --gap: 8px; }
+}
+
+/* Pequeno ajuste estético para seleção de texto indesejada */
+#botoes button, #display { -webkit-tap-highlight-color: transparent; }
